@@ -159,6 +159,15 @@ function NavLogo() {
 
 function Nav() {
   const [open, setOpen] = useState(false);
+
+  const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setOpen(false);
+    setTimeout(() => {
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    }, 350);
+  };
+
   return (
     <header className="absolute top-0 inset-x-0 z-30">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 h-16 sm:h-20 lg:h-28 flex items-center">
@@ -196,7 +205,7 @@ function Nav() {
                     <a
                       key={href}
                       href={href}
-                      onClick={() => setOpen(false)}
+                      onClick={(e) => scrollTo(e, href)}
                       className="text-foreground/80 hover:text-foreground transition py-3 border-b border-border/40 text-base"
                     >
                       {label}
@@ -205,7 +214,7 @@ function Nav() {
                 </div>
                 <a
                   href="#cta"
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => scrollTo(e, '#cta')}
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--maroon)] text-primary-foreground px-6 py-3 text-sm font-medium shadow-soft"
                 >
                   Book a Trial <ArrowRight className="h-4 w-4" />
